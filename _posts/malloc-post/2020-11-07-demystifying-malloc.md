@@ -77,7 +77,7 @@ This is the age-old problem of trying to delete something from the middle of the
 
 It looks like we're going to have take matters into our own hands. Maybe in the future we'll have more memory than we know what to do with and never free anything. Until then we'll need to do something clever. We have one thing going for us though, `malloc` always returns a pointer to *contiguous* memory. If we have a single "hole" of `free`d memory in the heap large enough to use somewhere, we can use it. It's simply a matter, then, of us keeping track of the allocated chunks (and the "holes" created by `free`ing those chunks) ourselves.
 
-Let's set up a general outline of what we want to accomplish.
+So maybe it was wrong say earlier that `sbrk` "allocates" memory for us, because now it seems like it just moves some pointer and tells us where it used to be. The actual "allocation" part of `malloc` is something we'll have to implement. Let's set up a general outline of what we want to accomplish.
 
 ```c
 typedef struct chunk {
