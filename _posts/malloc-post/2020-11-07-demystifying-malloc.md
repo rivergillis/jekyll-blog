@@ -5,11 +5,11 @@ date:   2020-11-07 09:29:20 +0700
 tags: [c, memory, programming]
 description: A journey through the implementation of malloc.
 ---
-It feels wrong to use a tool without knowing fully how it works. As programmers it is hard to accept that there is only so much that can fit into our noggins at once, but looking at code benchmarks or stack traces to see that some large amount of time is spent in some low-level C code always makes me wonder what is really going on in there. Maybe you're like me and occasionally start to use the 'Go to definition' IDE feature on standard libraries, and after a second or two of searching your window fills with scary underscores and #DEFINEs of things you didn't know existed, you think maybe this thing was auto-generated and no human would bother writing this header-file-hell. Unsatisfied you go back to whatever you were working on, no closer to understanding what's *really* going on down there.
+It feels wrong to use a tool without knowing fully how it works. As programmers it is hard to accept that there is only so much that can fit into our noggins at once, but looking at code benchmarks or stack traces to see that some large amount of time is spent in some low-level C code always makes me wonder what is really going on in there. Maybe you're like me and occasionally start to use the 'Go to definition' IDE feature on standard libraries, and after a second or two of searching your window fills with scary underscores and `#DEFINE`s of things you didn't know existed, you think maybe this thing was auto-generated and no human would bother writing this header-file-hell. Unsatisfied you go back to whatever you were working on, no closer to understanding what's *really* going on down there.
 
 For me I was always perplexed by `malloc`. It's a simple function, you ask for memory and it gives it to you. But *how* could a C function do that? What on Earth does it mean to *allocate* memory? Isn't it all there, sitting on the bus, just **waiting** for us to issue some good 'ol `MOV` instructions? Even worse, it is used *everywhere*. Even if you aren't using C there's a good chance you're using `malloc`, every time you create a new object in a language implemented in C, like `cpython` for instance. It isn't the only way to acquire memory, but it sure is a popular one. 
 
-So let's take a look at `malloc`, it can't be that complicated right? Here's `malloc`:
+So let's take a look at `malloc`, it can't be that complicated right? Here's a simple `malloc`:
 
 ```c
 void* malloc(size_t size) {
@@ -41,7 +41,7 @@ So that's `malloc`, simple right? Well judging from the length of this article y
 1. `sbrk` is absolutely ancient and super-deprecated. In fact if you run these snippets on macOS you're going to get tons of warnings (but hey, it still works!). It doesn't work with virtual memory and it isn't thread-safe. However, its API is very simple to use and `malloc` at one point in time very likely was implemented using `sbrk`.
 2. This implementation of `malloc` is incorrect. The first reason why, which you may be able to guess, is that `sbrk` can fail. Memory is a finite resource.
 
-According to `man sbrk`, the call can return -1 if it fails, but `malloc` is supposed to return NULL. This is fixed easily enough.
+According to `man sbrk`, the call can return -1 if it fails, but `malloc` is supposed to return `NULL`. This is fixed easily enough.
 
 ```c
 void* malloc(size_t size) {
@@ -73,9 +73,9 @@ void* b = malloc(1000);
 // But how do we free a from here?
 ```
 
-This is the age-old problem of trying to delete something from the middle of the stack. We could pop everything off of the stack until we reach the memory we're trying to delete (storing it somewhere else, a disk for instance), then pop the item to delete, then push everything else back onto the stack. This would be miserably slow. We could also abandon the stack mentality and just use `memcpy` to copy over the old bytes. This would also be very slow, usually we expect `free` to take an insignificant amount of time to complete. In either of these cases, we've created a new problem: when shifting all of the old memory to utilize the newly free'd space, all of the pointers in the program refering to that old memory would be invalidated.
+This is the age-old problem of trying to delete something from the middle of the stack. We could pop everything off of the stack until we reach the memory we're trying to delete (storing it somewhere else, we could even use the disk), then pop the item to delete, then push everything else back onto the stack. This would be miserably slow. We could also abandon the stack mentality and just use `memcpy` to copy over the old bytes. This would also be very slow, usually we expect `free` to take an insignificant amount of time to complete. In either of these cases, we've created a new problem: when shifting all of the old memory to utilize the newly free'd space, all of the pointers in the program refering to that old memory would be invalidated.
 
-It looks like we're going to have take matters into our own hands. Maybe in the future we'll have more memory than we know what to do with and never free anything. Until then we'll need to do something clever. We have one thing going for us though, `malloc` always returns a pointer to *contiguous* memory. If we have a single "hole" of free'd memory in the heap large enough to use somewhere, we can use it. It's simply a matter, then, of us keeping track of the allocated chunks (and the "holes" created by `free`ing those chunks) ourselves.
+It looks like we're going to have take matters into our own hands. Maybe in the future we'll have more memory than we know what to do with and never free anything. Until then we'll need to do something clever. We have one thing going for us though, `malloc` always returns a pointer to *contiguous* memory. If we have a single "hole" of `free`d memory in the heap large enough to use somewhere, we can use it. It's simply a matter, then, of us keeping track of the allocated chunks (and the "holes" created by `free`ing those chunks) ourselves.
 
 Let's set up a general outline of what we want to accomplish.
 
@@ -114,7 +114,7 @@ void free(void* ptr) {
 }
 ```
 
-We want some way to model the heap, so a linked list sounds simple enough. We could extend it to create an actual stack, but it isn't really needed here. The general idea is that for every chunk of memory allocated by `malloc`, the we store a few bytes (specifically `sizeof(Chunk)`) of metadata about that chunk right beforehand. We could store a pointer in Chunk to the actual user memory, but since the memory is contiguous we can easily compute where the metadata ends and the user data begins. `free`ing then becomes super easy, we can just get the metadata and mark that it's no longer allocated. The hard part is using that information.
+We want some way to model the heap, so a linked list sounds simple enough. We could extend it to create an actual stack, but it isn't really needed here. Normally we'd implement a linked list using `malloc`, but we're implementing `malloc` so we can't really use that, can we? So let's just sneak our data structure in with the user data. The general idea is that for every chunk of memory allocated by `malloc`, the we store a few bytes (specifically `sizeof(Chunk)`) of metadata about that chunk right beforehand. We could store a pointer in Chunk to the actual user memory, but since the memory is contiguous we can easily compute where the metadata ends and the user data begins. `free`ing then becomes super easy, we can just get the metadata and mark that it's no longer allocated. The hard part is using that information.
 
 ```c
 // Allocates a new chunk right after 'prev'.
