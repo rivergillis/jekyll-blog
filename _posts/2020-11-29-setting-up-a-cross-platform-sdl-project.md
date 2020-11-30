@@ -16,7 +16,7 @@ Let's start with a POSIX environment like macOS or a Linux distribution. If you'
 
 Great, now we can begin. We'll use a simple `Makefile` for our project:
 
-```Makefile
+```
 CXX=g++
 SDL2CFLAGS=-I/usr/local/include/SDL2 -D_THREAD_SAFE
 
