@@ -19,10 +19,10 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://river.codes" #
+url: "https://river.codes"
 baseurl:
 permalink: /:title/
-google_analytics: UA-133886314-1 # leave it blank if not wish
+google_analytics: UA-133886314-1
 
 # Collection setting
 collections:
