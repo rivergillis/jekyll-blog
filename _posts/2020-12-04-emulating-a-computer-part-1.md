@@ -6,7 +6,7 @@ date: 2020-12-04 16:42 -0800
 description: How to write a CHIP-8 emulator.
 ---
 
-![Tetris](/assets/img/tetris.gif)
+{% include mp4_embed.html file='tetris.mp4' %}
 
 For several reasons, emulation has always fascinated me. A program that executes other programs sounds like such a cool concept. It really feels like you're getting your money's worth out of writing it! Beyond that, it definitely feels like you're *building* a computer within software. I really enjoyed learning about computer architecture and writing some basic HDL code, but emulation is a much more straightforward way of achieving a similar feeling of generating a machine. I've also always had this goal of knowing exactly how *Super Mario World* worked, ever since I first saw it as a kid. Because of this, writing a SNES/SFC emulator has been on my mind for a while. I decided recently that it was time to take a [step forward](https://github.com/rivergillis/chip-8) towards making this happen.
 
@@ -323,4 +323,4 @@ CpuChip8::Instruction CpuChip8::GenLDREG(uint8_t reg) {
 
 When we interface directly with memory, the user provides the maximum register they'd like to use. For instance if they want to load registers V0, V1, V2 with the values stored sequentially in `MEM[I]` they'd pass in V2 after setting up `I`.
 
-With that, we've got ourselves a CHIP-8 interpreter! Sure, there's no sound or graphics hooked up, but as long as you don't use those functions you should be able to execute some basic test ROMs. In the next part of this series, we'll look at drawing, the most complex operation that the interpreter performs.
+With that, we've got ourselves a CHIP-8 interpreter! Sure, there's no sound or graphics hooked up, but as long as you don't use those functions you should be able to execute some basic test ROMs. [In the next part of this series]({% post_url 2020-12-06-emulating-a-computer-part-2 %}), we'll look at drawing, the most complex operation that the interpreter performs.
