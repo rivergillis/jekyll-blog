@@ -6,7 +6,7 @@ date: 2020-12-06 18:21 -0800
 description: Adding images to our CHIP-8 emulator.
 ---
 
-{% include mp4_embed.html file='invaders.mp4' %}
+{% include video_embed.html file='invaders' %}
 
 In the [last part of this series]({% post_url 2020-12-04-emulating-a-computer-part-1 %}) we built a CHIP-8 interpreter to execute all opcodes except for one, `Dxyn - DRW Vx, Vy, nibble`. To make this process easier, we'll encapsulate our image memory and operations in an `Image` class. Our 64x32 frame will be represented as a single chunk of data in memory, where each pixel is a single byte:
 
@@ -19,7 +19,7 @@ In the [last part of this series]({% post_url 2020-12-04-emulating-a-computer-pa
 0x7C0:|--------------------------------------------------------------|
 ```
 
-For our image above, we need to store three pieces of data: the number of rows, number of cols, and the starting address of the image memory (which `malloc` gives us). With this address pointing to the top-left corner of the memory, addressing individual pixels is fairly trivial. Some examples:
+For our image above, we need to store three pieces of data: the number of rows, number of cols, and the starting address of the image memory (which [`malloc`](https://river.codes/demystifying-malloc) gives us). With this address pointing to the top-left corner of the memory, addressing individual pixels is fairly trivial. Some examples:
 
 ```
 img[col=0, row=0] = img[0]
@@ -178,4 +178,4 @@ CpuChip8::Instruction CpuChip8::GenDRAW(uint8_t reg_x, uint8_t reg_y, uint8_t n_
 
 At this stage you should be able to execute some ROMs! Set up a call to `DrawToStdout` after a cycle execution and watch the output in your console. You'll have to run a program that doesn't expect any user input, however.
 
-In the next part of this series, we'll hook up SDL to get some actual graphics onto the screen. We'll also finally wire up the input!
+In the [next part of this series]({% post_url 2020-12-07-emulating-a-computer-part-3 %}), we'll hook up SDL to get some actual graphics onto the screen. We'll also finally wire up the input!

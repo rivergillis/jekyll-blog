@@ -6,7 +6,7 @@ date: 2020-12-04 16:42 -0800
 description: How to write a CHIP-8 emulator.
 ---
 
-{% include mp4_embed.html file='tetris.mp4' %}
+{% include video_embed.html file='tetris' %}
 
 For several reasons, emulation has always fascinated me. A program that executes other programs sounds like such a cool concept. It really feels like you're getting your money's worth out of writing it! Beyond that, it definitely feels like you're *building* a computer within software. I really enjoyed learning about computer architecture and writing some basic HDL code, but emulation is a much more straightforward way of achieving a similar feeling of generating a machine. I've also always had this goal of knowing exactly how *Super Mario World* worked, ever since I first saw it as a kid. Because of this, writing a SNES/SFC emulator has been on my mind for a while. I decided recently that it was time to take a [step forward](https://github.com/rivergillis/chip-8) towards making this happen.
 
