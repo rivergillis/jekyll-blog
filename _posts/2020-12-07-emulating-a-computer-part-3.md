@@ -158,4 +158,4 @@ We now need some new terminology to discuss this. "Stride"  (or "pitch") often r
 
 We basically just iterate over the entire image and copy it over to `dst`, though for every pixel in the original image we need to copy three bytes over to the new image, one for each channel. Here we can take advantage of the fact that our original image values are either 0 or 1 to provide some color to the new image using some scaling parameters.
 
-And just like that, we've got emulator output onto the screen! We're even utilizing the GPU! Your program output should start looking at lot like the videos at the top of these articles, though likely a bit slower. In next article we'll dive into timing in order to get everything running at the right speed.
+And just like that, we've got emulator output onto the screen! We're even utilizing the GPU! Your program output should start looking at lot like the videos at the top of these articles, though likely a bit slower. In [next article]({% post_url 2020-12-08-emulating-a-computer-part-4 %}) we'll dive into timing in order to get everything running at the right speed.
