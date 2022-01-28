@@ -6,7 +6,7 @@ date: 2022-01-27 16:11 -0800
 description: A demo video featuring raytraced speheres
 ---
 
-{% include video_embed.html file='rt_sphere' %}
+{% include video_embed.html file='rt_spheres' %}
 
 Recently I've been reading through [Computer Graphics from Scratch](https://gabrielgambetta.com/computer-graphics-from-scratch/). The sections on raytracing have been a great refresher for me, and I've learned some new tricks.
 
