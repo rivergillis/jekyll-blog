@@ -1,5 +1,5 @@
 # Site settings
-title: River's Blog # site title
+title: River Gillis [riv.dev] # site title
 description: >- # site description
   This is my personal blog.
 lang: en-US # default lang
@@ -15,11 +15,11 @@ author:
   username: rivergillis # general username
   github: rivergillis # github username
   twitter: rivergillis # twitter username
-  email: jrivergillis@gmail.com # email adress
+  email: river@riv.dev # email adress
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://river.codes"
+url: "https://riv.dev"
 baseurl:
 permalink: /:title/
 google_analytics: UA-133886314-1
