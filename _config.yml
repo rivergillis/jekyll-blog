@@ -11,7 +11,7 @@ mode: dark # default theme "dark" | "light"
 author:
   name: River Gillis # author name
   bio: >- # tell to the world
-    Hi there, I'm a software engineer at Google working on Project Starline.
+    Hi there, I'm a software engineer at Meta. Previously, I worked at Google on Project Starline.
   username: rivergillis # general username
   github: rivergillis # github username
   twitter: rivergillis # twitter username
