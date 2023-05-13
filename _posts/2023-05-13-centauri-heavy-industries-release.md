@@ -14,6 +14,6 @@ God has crafted you from blood and motor. Your sole purpose is to improve Their 
 ## About
 CENTAURI HEAVY INDUSTRIES is a narrative-driven resource gathering factory simulation game with multiple endings set in the grim darkness of the far future.
 
-{% include youtube.html url='http://www.youtube.com/embed/nXDn0gC_LHY'%}
+{% include youtube.html url='https://www.youtube.com/embed/nXDn0gC_LHY'%}
 
 ![CHI LOGO](/assets/img/centauri_logo_itch.png "CHI LOGO")
