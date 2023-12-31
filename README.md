@@ -1,3 +1,6 @@
+# TO RIVER (ME)
+`bundle exec jekyll serve`
+
 # Klisé
 
 Klisé is minimalist Jekyll theme for running a personal site and blog running on Jekyll.<br>
