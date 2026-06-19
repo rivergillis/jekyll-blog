@@ -4,6 +4,7 @@ title: "Japanese Progress Update 2023"
 tags: [japanese, language, learning]
 date: 2023-12-30 00:01 -0800
 description: My progress update for learning japanese in 2023
+published: false
 ---
 ![Anki screenshot](/assets/img/jp-progress-2023-anki.png "Anki Screenshot")
 # Context
