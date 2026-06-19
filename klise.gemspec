@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
     f.match(%r{^(_(includes|layouts|sass)/|(assets|LICENSE|README)((\.(txt|md|markdown|yml)|$)))}i)
   end
 
-  spec.add_runtime_dependency "jekyll", "~> 4.1"
+  spec.add_runtime_dependency "jekyll", "~> 4.4"
   spec.add_runtime_dependency 'jekyll-feed', '~> 0.13'
   spec.add_runtime_dependency 'jekyll-sitemap', '~> 1.4'
   spec.add_runtime_dependency 'jekyll-compose', '~> 0.12.0'

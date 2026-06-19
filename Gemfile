@@ -8,7 +8,14 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.1.0"
+gem "jekyll", "~> 4.4"
+
+# Pin the SCSS compiler and syntax highlighter to their current major versions.
+# Jekyll 4.4 permits jekyll-sass-converter 3 (Dart Sass) and rouge 4, but those can
+# subtly change rendered CSS / code-block HTML. Holding them here keeps the Jekyll
+# bump visually/behaviorally identical. Upgrading these is deliberate future work.
+gem "jekyll-sass-converter", "~> 2.0"
+gem "rouge", "~> 3.0"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 
