@@ -31,3 +31,11 @@ end
 # gem "wdm", "~> 0.1.0" if Gem.win_platform?
 
 gem "webrick", "~> 1.7"
+
+# Standard-library gems extracted as default/bundled gems in Ruby 3.4+/4.0.
+# Required for Jekyll 4.1 to run on a modern Ruby.
+gem "csv"
+gem "base64"
+gem "bigdecimal"
+gem "logger"
+gem "ostruct"
